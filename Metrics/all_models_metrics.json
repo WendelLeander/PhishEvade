@@ -1,0 +1,1566 @@
+{
+  "milestone": "7 - Model training and tuning",
+  "created": "2026-10-26T16:49:44",
+  "data": {
+    "source": "https://raw.githubusercontent.com/WendelLeander/PhishEvade/refs/heads/main/Dataset/Final_Dataset.csv",
+    "rows": 10000,
+    "train_rows": 8000,
+    "test_rows": 2000,
+    "split": "80/20 stratified",
+    "random_seed": 42
+  },
+  "feature_sets": {
+    "Level 1": [
+      "url_length",
+      "domain_length",
+      "path_length"
+    ],
+    "Level 2": [
+      "subdomain_count",
+      "path_depth",
+      "query_params_count",
+      "digit_ratio",
+      "special_char_ratio",
+      "token_variance",
+      "domain_entropy",
+      "redirect_key_flag",
+      "nested_url_flag",
+      "query_encoding_ratio"
+    ],
+    "Combined": [
+      "url_length",
+      "domain_length",
+      "path_length",
+      "subdomain_count",
+      "path_depth",
+      "query_params_count",
+      "digit_ratio",
+      "special_char_ratio",
+      "token_variance",
+      "domain_entropy",
+      "redirect_key_flag",
+      "nested_url_flag",
+      "query_encoding_ratio"
+    ]
+  },
+  "cross_validation": {
+    "folds": 5,
+    "scoring": "f1",
+    "search": "GridSearchCV"
+  },
+  "baseline": {
+    "classifier": "Logistic Regression",
+    "feature_set": "Level 1",
+    "test_metrics_default": {
+      "threshold": 0.5,
+      "accuracy": 0.6515,
+      "precision": 0.6731428571428572,
+      "recall": 0.589,
+      "f1": 0.6282666666666668,
+      "fpr": 0.286,
+      "youden_j": 0.303,
+      "tn": 714,
+      "fp": 286,
+      "fn": 411,
+      "tp": 589
+    }
+  },
+  "models": [
+    {
+      "classifier": "Logistic Regression",
+      "feature_set": "Level 1",
+      "features": [
+        "url_length",
+        "domain_length",
+        "path_length"
+      ],
+      "param_grid": {
+        "C": [
+          0.001,
+          0.01,
+          0.1,
+          1,
+          10,
+          100,
+          1000,
+          10000,
+          100000
+        ],
+        "class_weight": [
+          null,
+          "balanced"
+        ],
+        "solver": [
+          "lbfgs",
+          "liblinear"
+        ]
+      },
+      "best_params": {
+        "C": 1000,
+        "class_weight": null,
+        "solver": "liblinear"
+      },
+      "cv_f1": 0.6174200461015282,
+      "cv_f1_std": 0.00729467249564526,
+      "threshold": {
+        "default": 0.5,
+        "tuned": 0.58
+      },
+      "test_metrics": {
+        "default (0.5)": {
+          "threshold": 0.5,
+          "accuracy": 0.6515,
+          "precision": 0.6731428571428572,
+          "recall": 0.589,
+          "f1": 0.6282666666666668,
+          "fpr": 0.286,
+          "youden_j": 0.303,
+          "tn": 714,
+          "fp": 286,
+          "fn": 411,
+          "tp": 589
+        },
+        "tuned (Youden J)": {
+          "threshold": 0.58,
+          "accuracy": 0.679,
+          "precision": 0.8509803921568627,
+          "recall": 0.434,
+          "f1": 0.5748344370860927,
+          "fpr": 0.076,
+          "youden_j": 0.358,
+          "tn": 924,
+          "fp": 76,
+          "fn": 566,
+          "tp": 434
+        }
+      },
+      "resources": {
+        "training": {
+          "phase": "Training: Logistic Regression / Level 1",
+          "start": "16:29:57",
+          "end": "16:29:58",
+          "wall_time_s": 0.950589100131765,
+          "cpu_time_s": 0.953125,
+          "cpu_util_pct": 99.5,
+          "peak_memory_mb": 253.76953125,
+          "peak_memory_increase_mb": 12.125
+        },
+        "threshold_tuning": {
+          "phase": "Threshold tuning (out-of-fold)",
+          "start": "16:29:58",
+          "end": "16:29:58",
+          "wall_time_s": 0.022320300107821822,
+          "cpu_time_s": 0.015625,
+          "cpu_util_pct": 48.5,
+          "peak_memory_mb": 251.109375,
+          "peak_memory_increase_mb": 0.16015625
+        },
+        "inference_latency": {
+          "mean_ms": 0.05435885151382536,
+          "median_ms": 0.04469999112188816,
+          "p95_ms": 0.08791486034169792,
+          "n_urls": 2000
+        }
+      },
+      "model_file": "c:\\Users\\OWEn\\Desktop\\SCHOOL\\## THESIS\\THSN02\\PhishEvade\\Models\\logistic_regression__level_1.joblib"
+    },
+    {
+      "classifier": "Logistic Regression",
+      "feature_set": "Level 2",
+      "features": [
+        "subdomain_count",
+        "path_depth",
+        "query_params_count",
+        "digit_ratio",
+        "special_char_ratio",
+        "token_variance",
+        "domain_entropy",
+        "redirect_key_flag",
+        "nested_url_flag",
+        "query_encoding_ratio"
+      ],
+      "param_grid": {
+        "C": [
+          0.001,
+          0.01,
+          0.1,
+          1,
+          10,
+          100,
+          1000,
+          10000,
+          100000
+        ],
+        "class_weight": [
+          null,
+          "balanced"
+        ],
+        "solver": [
+          "lbfgs",
+          "liblinear"
+        ]
+      },
+      "best_params": {
+        "C": 100000,
+        "class_weight": null,
+        "solver": "lbfgs"
+      },
+      "cv_f1": 0.6375979865017352,
+      "cv_f1_std": 0.015853164863065816,
+      "threshold": {
+        "default": 0.5,
+        "tuned": 0.55
+      },
+      "test_metrics": {
+        "default (0.5)": {
+          "threshold": 0.5,
+          "accuracy": 0.638,
+          "precision": 0.6369047619047619,
+          "recall": 0.642,
+          "f1": 0.6394422310756972,
+          "fpr": 0.366,
+          "youden_j": 0.276,
+          "tn": 634,
+          "fp": 366,
+          "fn": 358,
+          "tp": 642
+        },
+        "tuned (Youden J)": {
+          "threshold": 0.55,
+          "accuracy": 0.68,
+          "precision": 0.7486187845303868,
+          "recall": 0.542,
+          "f1": 0.6287703016241301,
+          "fpr": 0.182,
+          "youden_j": 0.36000000000000004,
+          "tn": 818,
+          "fp": 182,
+          "fn": 458,
+          "tp": 542
+        }
+      },
+      "resources": {
+        "training": {
+          "phase": "Training: Logistic Regression / Level 2",
+          "start": "16:29:58",
+          "end": "16:30:01",
+          "wall_time_s": 2.5523268000688404,
+          "cpu_time_s": 2.46875,
+          "cpu_util_pct": 96.5,
+          "peak_memory_mb": 278.8046875,
+          "peak_memory_increase_mb": 26.3046875
+        },
+        "threshold_tuning": {
+          "phase": "Threshold tuning (out-of-fold)",
+          "start": "16:30:01",
+          "end": "16:30:01",
+          "wall_time_s": 0.11410280014388263,
+          "cpu_time_s": 0.140625,
+          "cpu_util_pct": 121.3,
+          "peak_memory_mb": 280.92578125,
+          "peak_memory_increase_mb": 2.140625
+        },
+        "inference_latency": {
+          "mean_ms": 0.04133049619849771,
+          "median_ms": 0.040300190448760986,
+          "p95_ms": 0.046999892219901085,
+          "n_urls": 2000
+        }
+      },
+      "model_file": "c:\\Users\\OWEn\\Desktop\\SCHOOL\\## THESIS\\THSN02\\PhishEvade\\Models\\logistic_regression__level_2.joblib"
+    },
+    {
+      "classifier": "Logistic Regression",
+      "feature_set": "Combined",
+      "features": [
+        "url_length",
+        "domain_length",
+        "path_length",
+        "subdomain_count",
+        "path_depth",
+        "query_params_count",
+        "digit_ratio",
+        "special_char_ratio",
+        "token_variance",
+        "domain_entropy",
+        "redirect_key_flag",
+        "nested_url_flag",
+        "query_encoding_ratio"
+      ],
+      "param_grid": {
+        "C": [
+          0.001,
+          0.01,
+          0.1,
+          1,
+          10,
+          100,
+          1000,
+          10000,
+          100000
+        ],
+        "class_weight": [
+          null,
+          "balanced"
+        ],
+        "solver": [
+          "lbfgs",
+          "liblinear"
+        ]
+      },
+      "best_params": {
+        "C": 100,
+        "class_weight": null,
+        "solver": "lbfgs"
+      },
+      "cv_f1": 0.6575606667436045,
+      "cv_f1_std": 0.01367926821290788,
+      "threshold": {
+        "default": 0.5,
+        "tuned": 0.54
+      },
+      "test_metrics": {
+        "default (0.5)": {
+          "threshold": 0.5,
+          "accuracy": 0.683,
+          "precision": 0.7051569506726457,
+          "recall": 0.629,
+          "f1": 0.6649048625792813,
+          "fpr": 0.263,
+          "youden_j": 0.366,
+          "tn": 737,
+          "fp": 263,
+          "fn": 371,
+          "tp": 629
+        },
+        "tuned (Youden J)": {
+          "threshold": 0.54,
+          "accuracy": 0.685,
+          "precision": 0.7453580901856764,
+          "recall": 0.562,
+          "f1": 0.6408209806157354,
+          "fpr": 0.192,
+          "youden_j": 0.37000000000000005,
+          "tn": 808,
+          "fp": 192,
+          "fn": 438,
+          "tp": 562
+        }
+      },
+      "resources": {
+        "training": {
+          "phase": "Training: Logistic Regression / Combined",
+          "start": "16:30:01",
+          "end": "16:30:06",
+          "wall_time_s": 4.669601700035855,
+          "cpu_time_s": 4.6875,
+          "cpu_util_pct": 100.2,
+          "peak_memory_mb": 288.3046875,
+          "peak_memory_increase_mb": 5.38671875
+        },
+        "threshold_tuning": {
+          "phase": "Threshold tuning (out-of-fold)",
+          "start": "16:30:06",
+          "end": "16:30:06",
+          "wall_time_s": 0.22315099998377264,
+          "cpu_time_s": 0.25,
+          "cpu_util_pct": 108.6,
+          "peak_memory_mb": 262.65234375,
+          "peak_memory_increase_mb": 3.17578125
+        },
+        "inference_latency": {
+          "mean_ms": 0.0428645956562832,
+          "median_ms": 0.03760005347430706,
+          "p95_ms": 0.0782451243139803,
+          "n_urls": 2000
+        }
+      },
+      "model_file": "c:\\Users\\OWEn\\Desktop\\SCHOOL\\## THESIS\\THSN02\\PhishEvade\\Models\\logistic_regression__combined.joblib"
+    },
+    {
+      "classifier": "Random Forest",
+      "feature_set": "Level 1",
+      "features": [
+        "url_length",
+        "domain_length",
+        "path_length"
+      ],
+      "param_grid": {
+        "n_estimators": [
+          100,
+          300
+        ],
+        "max_depth": [
+          null,
+          10,
+          20
+        ],
+        "min_samples_leaf": [
+          1,
+          3,
+          5
+        ]
+      },
+      "best_params": {
+        "max_depth": 20,
+        "min_samples_leaf": 1,
+        "n_estimators": 100
+      },
+      "cv_f1": 0.8919612149907502,
+      "cv_f1_std": 0.006127642173072569,
+      "threshold": {
+        "default": 0.5,
+        "tuned": 0.54
+      },
+      "test_metrics": {
+        "default (0.5)": {
+          "threshold": 0.5,
+          "accuracy": 0.887,
+          "precision": 0.9271523178807947,
+          "recall": 0.84,
+          "f1": 0.881427072402938,
+          "fpr": 0.066,
+          "youden_j": 0.774,
+          "tn": 934,
+          "fp": 66,
+          "fn": 160,
+          "tp": 840
+        },
+        "tuned (Youden J)": {
+          "threshold": 0.54,
+          "accuracy": 0.886,
+          "precision": 0.9317673378076062,
+          "recall": 0.833,
+          "f1": 0.8796198521647306,
+          "fpr": 0.061,
+          "youden_j": 0.772,
+          "tn": 939,
+          "fp": 61,
+          "fn": 167,
+          "tp": 833
+        }
+      },
+      "resources": {
+        "training": {
+          "phase": "Training: Random Forest / Level 1",
+          "start": "16:30:06",
+          "end": "16:30:52",
+          "wall_time_s": 45.885700500104576,
+          "cpu_time_s": 45.359375,
+          "cpu_util_pct": 98.8,
+          "peak_memory_mb": 289.16796875,
+          "peak_memory_increase_mb": 26.3046875
+        },
+        "threshold_tuning": {
+          "phase": "Threshold tuning (out-of-fold)",
+          "start": "16:30:52",
+          "end": "16:30:53",
+          "wall_time_s": 1.3803348999936134,
+          "cpu_time_s": 1.375,
+          "cpu_util_pct": 99.1,
+          "peak_memory_mb": 261.23046875,
+          "peak_memory_increase_mb": 8.6171875
+        },
+        "inference_latency": {
+          "mean_ms": 1.9672179498011246,
+          "median_ms": 1.770450035110116,
+          "p95_ms": 2.9542251373641193,
+          "n_urls": 2000
+        }
+      },
+      "model_file": "c:\\Users\\OWEn\\Desktop\\SCHOOL\\## THESIS\\THSN02\\PhishEvade\\Models\\random_forest__level_1.joblib"
+    },
+    {
+      "classifier": "Random Forest",
+      "feature_set": "Level 2",
+      "features": [
+        "subdomain_count",
+        "path_depth",
+        "query_params_count",
+        "digit_ratio",
+        "special_char_ratio",
+        "token_variance",
+        "domain_entropy",
+        "redirect_key_flag",
+        "nested_url_flag",
+        "query_encoding_ratio"
+      ],
+      "param_grid": {
+        "n_estimators": [
+          100,
+          300
+        ],
+        "max_depth": [
+          null,
+          10,
+          20
+        ],
+        "min_samples_leaf": [
+          1,
+          3,
+          5
+        ]
+      },
+      "best_params": {
+        "max_depth": null,
+        "min_samples_leaf": 1,
+        "n_estimators": 100
+      },
+      "cv_f1": 0.9121082691676967,
+      "cv_f1_std": 0.0036634437255653033,
+      "threshold": {
+        "default": 0.5,
+        "tuned": 0.47
+      },
+      "test_metrics": {
+        "default (0.5)": {
+          "threshold": 0.5,
+          "accuracy": 0.9185,
+          "precision": 0.9466382070437567,
+          "recall": 0.887,
+          "f1": 0.9158492514197212,
+          "fpr": 0.05,
+          "youden_j": 0.837,
+          "tn": 950,
+          "fp": 50,
+          "fn": 113,
+          "tp": 887
+        },
+        "tuned (Youden J)": {
+          "threshold": 0.47,
+          "accuracy": 0.916,
+          "precision": 0.9360587002096437,
+          "recall": 0.893,
+          "f1": 0.9140225179119755,
+          "fpr": 0.061,
+          "youden_j": 0.8320000000000001,
+          "tn": 939,
+          "fp": 61,
+          "fn": 107,
+          "tp": 893
+        }
+      },
+      "resources": {
+        "training": {
+          "phase": "Training: Random Forest / Level 2",
+          "start": "16:30:57",
+          "end": "16:33:24",
+          "wall_time_s": 146.45522689982317,
+          "cpu_time_s": 141.75,
+          "cpu_util_pct": 96.8,
+          "peak_memory_mb": 282.609375,
+          "peak_memory_increase_mb": 29.3515625
+        },
+        "threshold_tuning": {
+          "phase": "Threshold tuning (out-of-fold)",
+          "start": "16:33:24",
+          "end": "16:33:29",
+          "wall_time_s": 5.222728899912909,
+          "cpu_time_s": 5.140625,
+          "cpu_util_pct": 98.3,
+          "peak_memory_mb": 273.84765625,
+          "peak_memory_increase_mb": 11.94921875
+        },
+        "inference_latency": {
+          "mean_ms": 2.337523001828231,
+          "median_ms": 2.0335500594228506,
+          "p95_ms": 4.257525154389439,
+          "n_urls": 2000
+        }
+      },
+      "model_file": "c:\\Users\\OWEn\\Desktop\\SCHOOL\\## THESIS\\THSN02\\PhishEvade\\Models\\random_forest__level_2.joblib"
+    },
+    {
+      "classifier": "Random Forest",
+      "feature_set": "Combined",
+      "features": [
+        "url_length",
+        "domain_length",
+        "path_length",
+        "subdomain_count",
+        "path_depth",
+        "query_params_count",
+        "digit_ratio",
+        "special_char_ratio",
+        "token_variance",
+        "domain_entropy",
+        "redirect_key_flag",
+        "nested_url_flag",
+        "query_encoding_ratio"
+      ],
+      "param_grid": {
+        "n_estimators": [
+          100,
+          300
+        ],
+        "max_depth": [
+          null,
+          10,
+          20
+        ],
+        "min_samples_leaf": [
+          1,
+          3,
+          5
+        ]
+      },
+      "best_params": {
+        "max_depth": null,
+        "min_samples_leaf": 1,
+        "n_estimators": 300
+      },
+      "cv_f1": 0.9404105342462218,
+      "cv_f1_std": 0.002518387893211599,
+      "threshold": {
+        "default": 0.5,
+        "tuned": 0.49
+      },
+      "test_metrics": {
+        "default (0.5)": {
+          "threshold": 0.5,
+          "accuracy": 0.9435,
+          "precision": 0.9693121693121693,
+          "recall": 0.916,
+          "f1": 0.9419023136246787,
+          "fpr": 0.029,
+          "youden_j": 0.887,
+          "tn": 971,
+          "fp": 29,
+          "fn": 84,
+          "tp": 916
+        },
+        "tuned (Youden J)": {
+          "threshold": 0.49,
+          "accuracy": 0.9435,
+          "precision": 0.9683210137275607,
+          "recall": 0.917,
+          "f1": 0.9419619928094505,
+          "fpr": 0.03,
+          "youden_j": 0.887,
+          "tn": 970,
+          "fp": 30,
+          "fn": 83,
+          "tp": 917
+        }
+      },
+      "resources": {
+        "training": {
+          "phase": "Training: Random Forest / Combined",
+          "start": "16:33:34",
+          "end": "16:36:08",
+          "wall_time_s": 154.33166119991802,
+          "cpu_time_s": 147.390625,
+          "cpu_util_pct": 95.5,
+          "peak_memory_mb": 288.49609375,
+          "peak_memory_increase_mb": 20.38671875
+        },
+        "threshold_tuning": {
+          "phase": "Threshold tuning (out-of-fold)",
+          "start": "16:36:08",
+          "end": "16:36:25",
+          "wall_time_s": 16.814596000127494,
+          "cpu_time_s": 16.09375,
+          "cpu_util_pct": 95.7,
+          "peak_memory_mb": 311.3125,
+          "peak_memory_increase_mb": 25.37890625
+        },
+        "inference_latency": {
+          "mean_ms": 7.801337097538635,
+          "median_ms": 6.299349945038557,
+          "p95_ms": 16.980264836456623,
+          "n_urls": 2000
+        }
+      },
+      "model_file": "c:\\Users\\OWEn\\Desktop\\SCHOOL\\## THESIS\\THSN02\\PhishEvade\\Models\\random_forest__combined.joblib"
+    },
+    {
+      "classifier": "XGBoost",
+      "feature_set": "Level 1",
+      "features": [
+        "url_length",
+        "domain_length",
+        "path_length"
+      ],
+      "param_grid": {
+        "n_estimators": [
+          100,
+          300
+        ],
+        "max_depth": [
+          3,
+          5,
+          7
+        ],
+        "learning_rate": [
+          0.05,
+          0.1,
+          0.2
+        ]
+      },
+      "best_params": {
+        "learning_rate": 0.2,
+        "max_depth": 5,
+        "n_estimators": 300
+      },
+      "cv_f1": 0.8880201925287053,
+      "cv_f1_std": 0.008372801029855718,
+      "threshold": {
+        "default": 0.5,
+        "tuned": 0.56
+      },
+      "test_metrics": {
+        "default (0.5)": {
+          "threshold": 0.5,
+          "accuracy": 0.884,
+          "precision": 0.9238410596026491,
+          "recall": 0.837,
+          "f1": 0.8782791185729275,
+          "fpr": 0.069,
+          "youden_j": 0.768,
+          "tn": 931,
+          "fp": 69,
+          "fn": 163,
+          "tp": 837
+        },
+        "tuned (Youden J)": {
+          "threshold": 0.56,
+          "accuracy": 0.8845,
+          "precision": 0.9374288964732651,
+          "recall": 0.824,
+          "f1": 0.8770622671633849,
+          "fpr": 0.055,
+          "youden_j": 0.7689999999999999,
+          "tn": 945,
+          "fp": 55,
+          "fn": 176,
+          "tp": 824
+        }
+      },
+      "resources": {
+        "training": {
+          "phase": "Training: XGBoost / Level 1",
+          "start": "16:36:42",
+          "end": "16:37:19",
+          "wall_time_s": 36.8088217000477,
+          "cpu_time_s": 45.203125,
+          "cpu_util_pct": 122.8,
+          "peak_memory_mb": 297.625,
+          "peak_memory_increase_mb": 6.96875
+        },
+        "threshold_tuning": {
+          "phase": "Threshold tuning (out-of-fold)",
+          "start": "16:37:19",
+          "end": "16:37:22",
+          "wall_time_s": 2.9459402000065893,
+          "cpu_time_s": 3.328125,
+          "cpu_util_pct": 112.7,
+          "peak_memory_mb": 296.17578125,
+          "peak_memory_increase_mb": 0.34765625
+        },
+        "inference_latency": {
+          "mean_ms": 0.9659465018194169,
+          "median_ms": 0.9677999187260866,
+          "p95_ms": 1.552380050998181,
+          "n_urls": 2000
+        }
+      },
+      "model_file": "c:\\Users\\OWEn\\Desktop\\SCHOOL\\## THESIS\\THSN02\\PhishEvade\\Models\\xgboost__level_1.joblib"
+    },
+    {
+      "classifier": "XGBoost",
+      "feature_set": "Level 2",
+      "features": [
+        "subdomain_count",
+        "path_depth",
+        "query_params_count",
+        "digit_ratio",
+        "special_char_ratio",
+        "token_variance",
+        "domain_entropy",
+        "redirect_key_flag",
+        "nested_url_flag",
+        "query_encoding_ratio"
+      ],
+      "param_grid": {
+        "n_estimators": [
+          100,
+          300
+        ],
+        "max_depth": [
+          3,
+          5,
+          7
+        ],
+        "learning_rate": [
+          0.05,
+          0.1,
+          0.2
+        ]
+      },
+      "best_params": {
+        "learning_rate": 0.2,
+        "max_depth": 7,
+        "n_estimators": 300
+      },
+      "cv_f1": 0.9126956414003065,
+      "cv_f1_std": 0.00469582611503454,
+      "threshold": {
+        "default": 0.5,
+        "tuned": 0.57
+      },
+      "test_metrics": {
+        "default (0.5)": {
+          "threshold": 0.5,
+          "accuracy": 0.92,
+          "precision": 0.9375,
+          "recall": 0.9,
+          "f1": 0.9183673469387755,
+          "fpr": 0.06,
+          "youden_j": 0.8400000000000001,
+          "tn": 940,
+          "fp": 60,
+          "fn": 100,
+          "tp": 900
+        },
+        "tuned (Youden J)": {
+          "threshold": 0.57,
+          "accuracy": 0.9185,
+          "precision": 0.9428571428571428,
+          "recall": 0.891,
+          "f1": 0.9161953727506427,
+          "fpr": 0.054,
+          "youden_j": 0.837,
+          "tn": 946,
+          "fp": 54,
+          "fn": 109,
+          "tp": 891
+        }
+      },
+      "resources": {
+        "training": {
+          "phase": "Training: XGBoost / Level 2",
+          "start": "16:37:24",
+          "end": "16:38:19",
+          "wall_time_s": 54.96089859982021,
+          "cpu_time_s": 63.015625,
+          "cpu_util_pct": 114.6,
+          "peak_memory_mb": 301.25,
+          "peak_memory_increase_mb": 5.375
+        },
+        "threshold_tuning": {
+          "phase": "Threshold tuning (out-of-fold)",
+          "start": "16:38:19",
+          "end": "16:38:24",
+          "wall_time_s": 5.229986000107601,
+          "cpu_time_s": 5.75,
+          "cpu_util_pct": 109.7,
+          "peak_memory_mb": 299.37890625,
+          "peak_memory_increase_mb": 2.2890625
+        },
+        "inference_latency": {
+          "mean_ms": 1.1794811504660174,
+          "median_ms": 1.1521501000970602,
+          "p95_ms": 1.633249979931861,
+          "n_urls": 2000
+        }
+      },
+      "model_file": "c:\\Users\\OWEn\\Desktop\\SCHOOL\\## THESIS\\THSN02\\PhishEvade\\Models\\xgboost__level_2.joblib"
+    },
+    {
+      "classifier": "XGBoost",
+      "feature_set": "Combined",
+      "features": [
+        "url_length",
+        "domain_length",
+        "path_length",
+        "subdomain_count",
+        "path_depth",
+        "query_params_count",
+        "digit_ratio",
+        "special_char_ratio",
+        "token_variance",
+        "domain_entropy",
+        "redirect_key_flag",
+        "nested_url_flag",
+        "query_encoding_ratio"
+      ],
+      "param_grid": {
+        "n_estimators": [
+          100,
+          300
+        ],
+        "max_depth": [
+          3,
+          5,
+          7
+        ],
+        "learning_rate": [
+          0.05,
+          0.1,
+          0.2
+        ]
+      },
+      "best_params": {
+        "learning_rate": 0.2,
+        "max_depth": 7,
+        "n_estimators": 300
+      },
+      "cv_f1": 0.942921662396554,
+      "cv_f1_std": 0.003736158746284097,
+      "threshold": {
+        "default": 0.5,
+        "tuned": 0.44
+      },
+      "test_metrics": {
+        "default (0.5)": {
+          "threshold": 0.5,
+          "accuracy": 0.9475,
+          "precision": 0.9685863874345549,
+          "recall": 0.925,
+          "f1": 0.9462915601023018,
+          "fpr": 0.03,
+          "youden_j": 0.895,
+          "tn": 970,
+          "fp": 30,
+          "fn": 75,
+          "tp": 925
+        },
+        "tuned (Youden J)": {
+          "threshold": 0.44,
+          "accuracy": 0.9465,
+          "precision": 0.9607843137254902,
+          "recall": 0.931,
+          "f1": 0.9456576942610463,
+          "fpr": 0.038,
+          "youden_j": 0.893,
+          "tn": 962,
+          "fp": 38,
+          "fn": 69,
+          "tp": 931
+        }
+      },
+      "resources": {
+        "training": {
+          "phase": "Training: XGBoost / Combined",
+          "start": "16:38:26",
+          "end": "16:39:09",
+          "wall_time_s": 42.454441000008956,
+          "cpu_time_s": 58.3125,
+          "cpu_util_pct": 137.3,
+          "peak_memory_mb": 303.41796875,
+          "peak_memory_increase_mb": 6.3125
+        },
+        "threshold_tuning": {
+          "phase": "Threshold tuning (out-of-fold)",
+          "start": "16:39:09",
+          "end": "16:39:13",
+          "wall_time_s": 3.835695899790153,
+          "cpu_time_s": 4.5625,
+          "cpu_util_pct": 118.6,
+          "peak_memory_mb": 301.17578125,
+          "peak_memory_increase_mb": 3.34765625
+        },
+        "inference_latency": {
+          "mean_ms": 0.4509351971792057,
+          "median_ms": 0.39974995888769627,
+          "p95_ms": 0.7935048779472709,
+          "n_urls": 2000
+        }
+      },
+      "model_file": "c:\\Users\\OWEn\\Desktop\\SCHOOL\\## THESIS\\THSN02\\PhishEvade\\Models\\xgboost__combined.joblib"
+    },
+    {
+      "classifier": "Naive Bayes",
+      "feature_set": "Level 1",
+      "features": [
+        "url_length",
+        "domain_length",
+        "path_length"
+      ],
+      "param_grid": {
+        "var_smoothing": [
+          1e-09,
+          1e-08,
+          1e-07,
+          1e-06,
+          1e-05,
+          0.0001,
+          0.001,
+          0.01,
+          0.1,
+          1.0
+        ]
+      },
+      "best_params": {
+        "var_smoothing": 0.01
+      },
+      "cv_f1": 0.73141886963431,
+      "cv_f1_std": 0.012588540256815522,
+      "threshold": {
+        "default": 0.5,
+        "tuned": 0.53
+      },
+      "test_metrics": {
+        "default (0.5)": {
+          "threshold": 0.5,
+          "accuracy": 0.746,
+          "precision": 0.7795454545454545,
+          "recall": 0.686,
+          "f1": 0.7297872340425532,
+          "fpr": 0.194,
+          "youden_j": 0.49200000000000005,
+          "tn": 806,
+          "fp": 194,
+          "fn": 314,
+          "tp": 686
+        },
+        "tuned (Youden J)": {
+          "threshold": 0.53,
+          "accuracy": 0.7585,
+          "precision": 0.8140947752126367,
+          "recall": 0.67,
+          "f1": 0.7350521119034559,
+          "fpr": 0.153,
+          "youden_j": 0.517,
+          "tn": 847,
+          "fp": 153,
+          "fn": 330,
+          "tp": 670
+        }
+      },
+      "resources": {
+        "training": {
+          "phase": "Training: Naive Bayes / Level 1",
+          "start": "16:39:14",
+          "end": "16:39:14",
+          "wall_time_s": 0.12835219991393387,
+          "cpu_time_s": 0.125,
+          "cpu_util_pct": 91.2,
+          "peak_memory_mb": 297.953125,
+          "peak_memory_increase_mb": 0.01953125
+        },
+        "threshold_tuning": {
+          "phase": "Threshold tuning (out-of-fold)",
+          "start": "16:39:14",
+          "end": "16:39:14",
+          "wall_time_s": 0.010997199919074774,
+          "cpu_time_s": 0.0,
+          "cpu_util_pct": 0.0,
+          "peak_memory_mb": 297.953125,
+          "peak_memory_increase_mb": 0.01953125
+        },
+        "inference_latency": {
+          "mean_ms": 0.14258164970669895,
+          "median_ms": 0.12660003267228603,
+          "p95_ms": 0.21380999824032187,
+          "n_urls": 2000
+        }
+      },
+      "model_file": "c:\\Users\\OWEn\\Desktop\\SCHOOL\\## THESIS\\THSN02\\PhishEvade\\Models\\naive_bayes__level_1.joblib"
+    },
+    {
+      "classifier": "Naive Bayes",
+      "feature_set": "Level 2",
+      "features": [
+        "subdomain_count",
+        "path_depth",
+        "query_params_count",
+        "digit_ratio",
+        "special_char_ratio",
+        "token_variance",
+        "domain_entropy",
+        "redirect_key_flag",
+        "nested_url_flag",
+        "query_encoding_ratio"
+      ],
+      "param_grid": {
+        "var_smoothing": [
+          1e-09,
+          1e-08,
+          1e-07,
+          1e-06,
+          1e-05,
+          0.0001,
+          0.001,
+          0.01,
+          0.1,
+          1.0
+        ]
+      },
+      "best_params": {
+        "var_smoothing": 0.1
+      },
+      "cv_f1": 0.7012907678832008,
+      "cv_f1_std": 0.013858405496149253,
+      "threshold": {
+        "default": 0.5,
+        "tuned": 0.57
+      },
+      "test_metrics": {
+        "default (0.5)": {
+          "threshold": 0.5,
+          "accuracy": 0.6865,
+          "precision": 0.6731662024141133,
+          "recall": 0.725,
+          "f1": 0.6981222917669716,
+          "fpr": 0.352,
+          "youden_j": 0.373,
+          "tn": 648,
+          "fp": 352,
+          "fn": 275,
+          "tp": 725
+        },
+        "tuned (Youden J)": {
+          "threshold": 0.57,
+          "accuracy": 0.7195,
+          "precision": 0.8010973936899863,
+          "recall": 0.584,
+          "f1": 0.6755349913244649,
+          "fpr": 0.145,
+          "youden_j": 0.43899999999999995,
+          "tn": 855,
+          "fp": 145,
+          "fn": 416,
+          "tp": 584
+        }
+      },
+      "resources": {
+        "training": {
+          "phase": "Training: Naive Bayes / Level 2",
+          "start": "16:39:14",
+          "end": "16:39:14",
+          "wall_time_s": 0.18528479989618063,
+          "cpu_time_s": 0.171875,
+          "cpu_util_pct": 90.9,
+          "peak_memory_mb": 298.01171875,
+          "peak_memory_increase_mb": 0.0234375
+        },
+        "threshold_tuning": {
+          "phase": "Threshold tuning (out-of-fold)",
+          "start": "16:39:14",
+          "end": "16:39:14",
+          "wall_time_s": 0.026890299981459975,
+          "cpu_time_s": 0.015625,
+          "cpu_util_pct": 47.0,
+          "peak_memory_mb": 298.01171875,
+          "peak_memory_increase_mb": 0.01953125
+        },
+        "inference_latency": {
+          "mean_ms": 0.12890159827657044,
+          "median_ms": 0.11930009350180626,
+          "p95_ms": 0.175054941792041,
+          "n_urls": 2000
+        }
+      },
+      "model_file": "c:\\Users\\OWEn\\Desktop\\SCHOOL\\## THESIS\\THSN02\\PhishEvade\\Models\\naive_bayes__level_2.joblib"
+    },
+    {
+      "classifier": "Naive Bayes",
+      "feature_set": "Combined",
+      "features": [
+        "url_length",
+        "domain_length",
+        "path_length",
+        "subdomain_count",
+        "path_depth",
+        "query_params_count",
+        "digit_ratio",
+        "special_char_ratio",
+        "token_variance",
+        "domain_entropy",
+        "redirect_key_flag",
+        "nested_url_flag",
+        "query_encoding_ratio"
+      ],
+      "param_grid": {
+        "var_smoothing": [
+          1e-09,
+          1e-08,
+          1e-07,
+          1e-06,
+          1e-05,
+          0.0001,
+          0.001,
+          0.01,
+          0.1,
+          1.0
+        ]
+      },
+      "best_params": {
+        "var_smoothing": 0.01
+      },
+      "cv_f1": 0.7091703449001062,
+      "cv_f1_std": 0.029298639927884517,
+      "threshold": {
+        "default": 0.5,
+        "tuned": 0.6
+      },
+      "test_metrics": {
+        "default (0.5)": {
+          "threshold": 0.5,
+          "accuracy": 0.631,
+          "precision": 0.5899725274725275,
+          "recall": 0.859,
+          "f1": 0.6995114006514658,
+          "fpr": 0.597,
+          "youden_j": 0.262,
+          "tn": 403,
+          "fp": 597,
+          "fn": 141,
+          "tp": 859
+        },
+        "tuned (Youden J)": {
+          "threshold": 0.6,
+          "accuracy": 0.7295,
+          "precision": 0.7581552305961755,
+          "recall": 0.674,
+          "f1": 0.7136050820539969,
+          "fpr": 0.215,
+          "youden_j": 0.4590000000000001,
+          "tn": 785,
+          "fp": 215,
+          "fn": 326,
+          "tp": 674
+        }
+      },
+      "resources": {
+        "training": {
+          "phase": "Training: Naive Bayes / Combined",
+          "start": "16:39:15",
+          "end": "16:39:15",
+          "wall_time_s": 0.15763420006260276,
+          "cpu_time_s": 0.15625,
+          "cpu_util_pct": 98.2,
+          "peak_memory_mb": 298.0390625,
+          "peak_memory_increase_mb": 0.01953125
+        },
+        "threshold_tuning": {
+          "phase": "Threshold tuning (out-of-fold)",
+          "start": "16:39:15",
+          "end": "16:39:15",
+          "wall_time_s": 0.014148599933832884,
+          "cpu_time_s": 0.015625,
+          "cpu_util_pct": 71.1,
+          "peak_memory_mb": 298.0390625,
+          "peak_memory_increase_mb": 0.01953125
+        },
+        "inference_latency": {
+          "mean_ms": 0.1331065495032817,
+          "median_ms": 0.11709984391927719,
+          "p95_ms": 0.25512496940791607,
+          "n_urls": 2000
+        }
+      },
+      "model_file": "c:\\Users\\OWEn\\Desktop\\SCHOOL\\## THESIS\\THSN02\\PhishEvade\\Models\\naive_bayes__combined.joblib"
+    },
+    {
+      "classifier": "AdaBoost",
+      "feature_set": "Level 1",
+      "features": [
+        "url_length",
+        "domain_length",
+        "path_length"
+      ],
+      "param_grid": {
+        "n_estimators": [
+          50,
+          100,
+          200
+        ],
+        "learning_rate": [
+          0.01,
+          0.1,
+          1.0
+        ],
+        "estimator__max_depth": [
+          1,
+          2,
+          3
+        ]
+      },
+      "best_params": {
+        "estimator__max_depth": 3,
+        "learning_rate": 1.0,
+        "n_estimators": 200
+      },
+      "cv_f1": 0.8632777977058593,
+      "cv_f1_std": 0.0101946905793963,
+      "threshold": {
+        "default": 0.5,
+        "tuned": 0.51
+      },
+      "test_metrics": {
+        "default (0.5)": {
+          "threshold": 0.5,
+          "accuracy": 0.871,
+          "precision": 0.9085903083700441,
+          "recall": 0.825,
+          "f1": 0.8647798742138365,
+          "fpr": 0.083,
+          "youden_j": 0.742,
+          "tn": 917,
+          "fp": 83,
+          "fn": 175,
+          "tp": 825
+        },
+        "tuned (Youden J)": {
+          "threshold": 0.51,
+          "accuracy": 0.863,
+          "precision": 0.926056338028169,
+          "recall": 0.789,
+          "f1": 0.8520518358531317,
+          "fpr": 0.063,
+          "youden_j": 0.726,
+          "tn": 937,
+          "fp": 63,
+          "fn": 211,
+          "tp": 789
+        }
+      },
+      "resources": {
+        "training": {
+          "phase": "Training: AdaBoost / Level 1",
+          "start": "16:39:15",
+          "end": "16:40:33",
+          "wall_time_s": 78.13944299984723,
+          "cpu_time_s": 74.78125,
+          "cpu_util_pct": 95.7,
+          "peak_memory_mb": 298.05859375,
+          "peak_memory_increase_mb": 0.01953125
+        },
+        "threshold_tuning": {
+          "phase": "Threshold tuning (out-of-fold)",
+          "start": "16:40:33",
+          "end": "16:40:40",
+          "wall_time_s": 6.528867500135675,
+          "cpu_time_s": 6.328125,
+          "cpu_util_pct": 96.8,
+          "peak_memory_mb": 295.62109375,
+          "peak_memory_increase_mb": 0.01953125
+        },
+        "inference_latency": {
+          "mean_ms": 12.813359248219058,
+          "median_ms": 10.081599932163954,
+          "p95_ms": 26.93656508345157,
+          "n_urls": 2000
+        }
+      },
+      "model_file": "c:\\Users\\OWEn\\Desktop\\SCHOOL\\## THESIS\\THSN02\\PhishEvade\\Models\\adaboost__level_1.joblib"
+    },
+    {
+      "classifier": "AdaBoost",
+      "feature_set": "Level 2",
+      "features": [
+        "subdomain_count",
+        "path_depth",
+        "query_params_count",
+        "digit_ratio",
+        "special_char_ratio",
+        "token_variance",
+        "domain_entropy",
+        "redirect_key_flag",
+        "nested_url_flag",
+        "query_encoding_ratio"
+      ],
+      "param_grid": {
+        "n_estimators": [
+          50,
+          100,
+          200
+        ],
+        "learning_rate": [
+          0.01,
+          0.1,
+          1.0
+        ],
+        "estimator__max_depth": [
+          1,
+          2,
+          3
+        ]
+      },
+      "best_params": {
+        "estimator__max_depth": 3,
+        "learning_rate": 1.0,
+        "n_estimators": 200
+      },
+      "cv_f1": 0.8746403382272803,
+      "cv_f1_std": 0.009026356631166837,
+      "threshold": {
+        "default": 0.5,
+        "tuned": 0.5
+      },
+      "test_metrics": {
+        "default (0.5)": {
+          "threshold": 0.5,
+          "accuracy": 0.8765,
+          "precision": 0.8950682056663168,
+          "recall": 0.853,
+          "f1": 0.8735279057859703,
+          "fpr": 0.1,
+          "youden_j": 0.753,
+          "tn": 900,
+          "fp": 100,
+          "fn": 147,
+          "tp": 853
+        },
+        "tuned (Youden J)": {
+          "threshold": 0.5,
+          "accuracy": 0.8765,
+          "precision": 0.8950682056663168,
+          "recall": 0.853,
+          "f1": 0.8735279057859703,
+          "fpr": 0.1,
+          "youden_j": 0.753,
+          "tn": 900,
+          "fp": 100,
+          "fn": 147,
+          "tp": 853
+        }
+      },
+      "resources": {
+        "training": {
+          "phase": "Training: AdaBoost / Level 2",
+          "start": "16:41:07",
+          "end": "16:42:21",
+          "wall_time_s": 74.1668054999318,
+          "cpu_time_s": 73.46875,
+          "cpu_util_pct": 99.1,
+          "peak_memory_mb": 295.625,
+          "peak_memory_increase_mb": 0.0234375
+        },
+        "threshold_tuning": {
+          "phase": "Threshold tuning (out-of-fold)",
+          "start": "16:42:21",
+          "end": "16:42:27",
+          "wall_time_s": 6.084724700078368,
+          "cpu_time_s": 5.96875,
+          "cpu_util_pct": 98.1,
+          "peak_memory_mb": 295.625,
+          "peak_memory_increase_mb": 0.01953125
+        },
+        "inference_latency": {
+          "mean_ms": 9.901663047261536,
+          "median_ms": 9.532300056889653,
+          "p95_ms": 12.862599932122976,
+          "n_urls": 2000
+        }
+      },
+      "model_file": "c:\\Users\\OWEn\\Desktop\\SCHOOL\\## THESIS\\THSN02\\PhishEvade\\Models\\adaboost__level_2.joblib"
+    },
+    {
+      "classifier": "AdaBoost",
+      "feature_set": "Combined",
+      "features": [
+        "url_length",
+        "domain_length",
+        "path_length",
+        "subdomain_count",
+        "path_depth",
+        "query_params_count",
+        "digit_ratio",
+        "special_char_ratio",
+        "token_variance",
+        "domain_entropy",
+        "redirect_key_flag",
+        "nested_url_flag",
+        "query_encoding_ratio"
+      ],
+      "param_grid": {
+        "n_estimators": [
+          50,
+          100,
+          200
+        ],
+        "learning_rate": [
+          0.01,
+          0.1,
+          1.0
+        ],
+        "estimator__max_depth": [
+          1,
+          2,
+          3
+        ]
+      },
+      "best_params": {
+        "estimator__max_depth": 3,
+        "learning_rate": 1.0,
+        "n_estimators": 200
+      },
+      "cv_f1": 0.9163246227325249,
+      "cv_f1_std": 0.005699649199121337,
+      "threshold": {
+        "default": 0.5,
+        "tuned": 0.51
+      },
+      "test_metrics": {
+        "default (0.5)": {
+          "threshold": 0.5,
+          "accuracy": 0.929,
+          "precision": 0.9478079331941545,
+          "recall": 0.908,
+          "f1": 0.9274770173646578,
+          "fpr": 0.05,
+          "youden_j": 0.858,
+          "tn": 950,
+          "fp": 50,
+          "fn": 92,
+          "tp": 908
+        },
+        "tuned (Youden J)": {
+          "threshold": 0.51,
+          "accuracy": 0.9245,
+          "precision": 0.9629225736095965,
+          "recall": 0.883,
+          "f1": 0.9212310902451748,
+          "fpr": 0.034,
+          "youden_j": 0.849,
+          "tn": 966,
+          "fp": 34,
+          "fn": 117,
+          "tp": 883
+        }
+      },
+      "resources": {
+        "training": {
+          "phase": "Training: AdaBoost / Combined",
+          "start": "16:42:48",
+          "end": "16:44:17",
+          "wall_time_s": 89.26707559986971,
+          "cpu_time_s": 88.4375,
+          "cpu_util_pct": 99.1,
+          "peak_memory_mb": 295.625,
+          "peak_memory_increase_mb": 0.01953125
+        },
+        "threshold_tuning": {
+          "phase": "Threshold tuning (out-of-fold)",
+          "start": "16:44:17",
+          "end": "16:44:24",
+          "wall_time_s": 7.361268500098959,
+          "cpu_time_s": 7.28125,
+          "cpu_util_pct": 98.8,
+          "peak_memory_mb": 295.625,
+          "peak_memory_increase_mb": 0.01953125
+        },
+        "inference_latency": {
+          "mean_ms": 9.217030601459555,
+          "median_ms": 8.663150016218424,
+          "p95_ms": 11.985910090152172,
+          "n_urls": 2000
+        }
+      },
+      "model_file": "c:\\Users\\OWEn\\Desktop\\SCHOOL\\## THESIS\\THSN02\\PhishEvade\\Models\\adaboost__combined.joblib"
+    }
+  ],
+  "environment": {
+    "python": "3.13.1",
+    "sklearn": "1.7.1",
+    "xgboost": "3.4.1",
+    "numpy": "2.2.5",
+    "pandas": "2.2.3",
+    "psutil": "7.0.0",
+    "logical_cpus": 22,
+    "ram_gb": 15.4
+  }
+}

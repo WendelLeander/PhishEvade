@@ -1,0 +1,16 @@
+classifier,feature_set,n_features,file,size_mb,sha256,threshold_tuned
+Logistic Regression,Level 1,3,c:\Users\OWEn\Desktop\SCHOOL\## THESIS\THSN02\PhishEvade\Models\logistic_regression__level_1.joblib,0.0012845993041992188,251c7bf9d721355c991c838a247d42f95ec2d985dd95da595d460bd0bb5f1118,0.58
+Logistic Regression,Level 2,10,c:\Users\OWEn\Desktop\SCHOOL\## THESIS\THSN02\PhishEvade\Models\logistic_regression__level_2.joblib,0.001453399658203125,9be3bae9ab93bdffc19fcebf6676ec5848f55ffc6b5d52e1f9a9f181bed17052,0.55
+Logistic Regression,Combined,13,c:\Users\OWEn\Desktop\SCHOOL\## THESIS\THSN02\PhishEvade\Models\logistic_regression__combined.joblib,0.0015230178833007812,e4af8eda1f366d7b6c98f01127ac2d6392e0174a97da3ae90d2a44cde23b4011,0.54
+Random Forest,Level 1,3,c:\Users\OWEn\Desktop\SCHOOL\## THESIS\THSN02\PhishEvade\Models\random_forest__level_1.joblib,9.482340812683105,414bbe7c24f8591d9520cbf57ff327face6dff70e55f8c7f01b1be3a7eda7e90,0.54
+Random Forest,Level 2,10,c:\Users\OWEn\Desktop\SCHOOL\## THESIS\THSN02\PhishEvade\Models\random_forest__level_2.joblib,12.703465461730957,3bf7e20b9cebfbc8ff2210b2e69fe65bf610bad142b041f91b973c688a4e09a5,0.47
+Random Forest,Combined,13,c:\Users\OWEn\Desktop\SCHOOL\## THESIS\THSN02\PhishEvade\Models\random_forest__combined.joblib,29.33024787902832,e070b0ad2a5c943cfbfd5da18f4491de1e2cf03294a0ef93beece0cf92806d43,0.49
+XGBoost,Level 1,3,c:\Users\OWEn\Desktop\SCHOOL\## THESIS\THSN02\PhishEvade\Models\xgboost__level_1.joblib,0.5493412017822266,184247e757f589a23c5344a44b4730a5268123c7845ababbf093d26a6f02fa34,0.56
+XGBoost,Level 2,10,c:\Users\OWEn\Desktop\SCHOOL\## THESIS\THSN02\PhishEvade\Models\xgboost__level_2.joblib,0.8667278289794922,6b6ac98695fc903f67da9a34353148abb689b6e47756f9ba9f3e0da1df2842e6,0.57
+XGBoost,Combined,13,c:\Users\OWEn\Desktop\SCHOOL\## THESIS\THSN02\PhishEvade\Models\xgboost__combined.joblib,0.825714111328125,5e3c1e21d0aab6f50dbaf4a80f4825019720d07f5b7080751532146bccefe49a,0.44
+Naive Bayes,Level 1,3,c:\Users\OWEn\Desktop\SCHOOL\## THESIS\THSN02\PhishEvade\Models\naive_bayes__level_1.joblib,0.0012407302856445312,3d9792266df7763c3361710afa973a3fc965bef9ebb2e43308ad76b0c9aec6c5,0.53
+Naive Bayes,Level 2,10,c:\Users\OWEn\Desktop\SCHOOL\## THESIS\THSN02\PhishEvade\Models\naive_bayes__level_2.joblib,0.0015869140625,0d38f9860eda73e9434a434bd126df3ff61b3d6ef73881f5559ef0b27896e63a,0.57
+Naive Bayes,Combined,13,c:\Users\OWEn\Desktop\SCHOOL\## THESIS\THSN02\PhishEvade\Models\naive_bayes__combined.joblib,0.001720428466796875,7e2d9887f66e31fbdd0032994b2832cd835035a0318ade0eae9ad0a82b522871,0.6
+AdaBoost,Level 1,3,c:\Users\OWEn\Desktop\SCHOOL\## THESIS\THSN02\PhishEvade\Models\adaboost__level_1.joblib,0.2501955032348633,bedcb007e0ee391d54d5d3611b1691e8f4ae2ae46f323d196debe2a3e9e1dea1,0.51
+AdaBoost,Level 2,10,c:\Users\OWEn\Desktop\SCHOOL\## THESIS\THSN02\PhishEvade\Models\adaboost__level_2.joblib,0.26558685302734375,5ef3b67b652d0fba693063aea04da4418f959d17999f3952b4ab53e9d671060e,0.5
+AdaBoost,Combined,13,c:\Users\OWEn\Desktop\SCHOOL\## THESIS\THSN02\PhishEvade\Models\adaboost__combined.joblib,0.2816505432128906,d17470695fb3e11929cfc3090089876e17630013a1ec2601d94fa735b278ea01,0.51

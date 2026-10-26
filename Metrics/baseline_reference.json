@@ -1,0 +1,38 @@
+{
+  "classifier": "Logistic Regression",
+  "feature_set": "Level 1 (3 features)",
+  "best_params": {
+    "C": 1000,
+    "class_weight": null,
+    "solver": "liblinear"
+  },
+  "cv_f1": 0.6174200461015282,
+  "test_metrics": {
+    "default (0.5)": {
+      "threshold": 0.5,
+      "accuracy": 0.6515,
+      "precision": 0.6731428571428572,
+      "recall": 0.589,
+      "f1": 0.6282666666666668,
+      "fpr": 0.286,
+      "youden_j": 0.303,
+      "tn": 714,
+      "fp": 286,
+      "fn": 411,
+      "tp": 589
+    },
+    "tuned (Youden J)": {
+      "threshold": 0.58,
+      "accuracy": 0.679,
+      "precision": 0.8509803921568627,
+      "recall": 0.434,
+      "f1": 0.5748344370860927,
+      "fpr": 0.076,
+      "youden_j": 0.358,
+      "tn": 924,
+      "fp": 76,
+      "fn": 566,
+      "tp": 434
+    }
+  }
+}
