@@ -1,0 +1,3 @@
+classifier,feature_set,threshold_rule,threshold,accuracy,precision,recall,f1,fpr,youden_j,tn,fp,fn,tp,training_time_s,peak_memory_mb,inference_ms_per_url
+Logistic Regression,Level 1 (3 features),default (0.5),0.5,0.691,0.7290167865707434,0.608,0.6630316248636859,0.226,0.382,774,226,392,608,4.338335847000053,272.40625,0.15450703949522904
+Logistic Regression,Level 1 (3 features),tuned (Youden J),0.6,0.7095,0.8930581613508443,0.476,0.6210045662100457,0.057,0.419,943,57,524,476,4.338335847000053,272.40625,0.15450703949522904
