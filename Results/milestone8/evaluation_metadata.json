@@ -1,0 +1,103 @@
+{
+  "study": "Obfuscation-Aware Feature Engineering for Evasion-Heavy Phishing URL Detection",
+  "source_commit_reviewed": "dated dataset (split column: train / test / evasion_holdout)",
+  "status": "PROVISIONAL: test set previously inspected; evasion holdout temporal on the phishing side only",
+  "threshold": 0.5,
+  "seed": 42,
+  "n_boot": 2000,
+  "n_test": 1568,
+  "class_counts": {
+    "benign": 784,
+    "phishing": 784
+  },
+  "n_train": 6272,
+  "n_holdout": 2160,
+  "holdout_class_counts": {
+    "benign": 1080,
+    "phishing": 1080
+  },
+  "holdout_cutoff": "2026-03-01",
+  "holdout_phishing_dates": [
+    "2026-03-01",
+    "2026-05-25"
+  ],
+  "heuristic_subset_cutoffs": {
+    "domain_entropy": 3.9035490078727877,
+    "token_variance": 94.29514619883044
+  },
+  "feature_sets": {
+    "Level 1": [
+      "url_length",
+      "domain_length",
+      "path_length"
+    ],
+    "Level 2": [
+      "subdomain_count",
+      "path_depth",
+      "query_params_count",
+      "digit_ratio",
+      "special_char_ratio",
+      "token_variance",
+      "domain_entropy",
+      "redirect_key_flag",
+      "nested_url_flag",
+      "query_encoding_ratio"
+    ],
+    "Combined": [
+      "url_length",
+      "domain_length",
+      "path_length",
+      "subdomain_count",
+      "path_depth",
+      "query_params_count",
+      "digit_ratio",
+      "special_char_ratio",
+      "token_variance",
+      "domain_entropy",
+      "redirect_key_flag",
+      "nested_url_flag",
+      "query_encoding_ratio"
+    ]
+  },
+  "training_environment": {
+    "python": "3.13.18",
+    "sklearn": "1.6.1",
+    "xgboost": "3.4.1",
+    "numpy": "2.4.6",
+    "pandas": "2.2.3",
+    "psutil": "5.9.5",
+    "logical_cpus": 2,
+    "ram_gb": 12.7
+  },
+  "evaluation_environment": {
+    "python": "3.13.18",
+    "sklearn": "1.6.1",
+    "xgboost": "3.4.1",
+    "pandas": "2.2.3",
+    "numpy": "2.4.6",
+    "scipy": "1.16.3",
+    "platform": "Linux-6.6.159+-x86_64-with-glibc2.39",
+    "logical_cpus": 2,
+    "ram_gb": 12.671398162841797,
+    "native_threads": 1
+  },
+  "input_sha256": {
+    "Dataset/Dataset.csv": "0a1b0f03a55969ac96984406bfe29309725f0c997e332ecea58cac0985dc13ac",
+    "Dataset/Final_Dataset.csv": "a9e59e99f71a0ac3d0c5da66abff217ddbc2943f55953c02e23fe2bb6b27ee94",
+    "Dataset/Extracted_Features.csv": "f90aa4cc328b0d0df4ef35f53e57e9cca28a31d17522916aab6424b771a74e2a",
+    "Dataset/Preprocessed_Dataset.csv": "801686a21db302d8a9ca4ac49fb30980a7d109c5f4f53d17bdaa88392c5cf635",
+    "Models/train_test_split_indices.csv": "b1b5dcd3fa88065bb81c7003d4d765530c9fbd9c992b496b8d47764919aabb58",
+    "Metrics/models_manifest.csv": "1ebcd4cc41d5d7c54f62fc37e3716d1802c6adbd067db30146b7099a13828580",
+    "Metrics/all_models_metrics.json": "5a59d04dbd69966b52bc1bcf44c78205e5930a4a4eb9370d1d606bb9d64711ce",
+    "Models/baseline_logistic_regression.joblib": "f52ff3bd45798d86e5cea60ae4b069490f27d7fa5cc631ff204c17a3b6af7a7f"
+  },
+  "caveats": [
+    "test scores previously displayed in Modules 6 and 7",
+    "evasion holdout benign URLs are not dated",
+    "some evasion holdout phishing domains also occur in training",
+    "heuristic evasion indicators are supplementary and partly circular",
+    "RSS includes retained models and runtime",
+    "row bootstrap assumes independent URLs; domains may be shared",
+    "test ranking is exploratory; do not retune from it"
+  ]
+}

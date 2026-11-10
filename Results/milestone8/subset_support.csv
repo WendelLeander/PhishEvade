@@ -1,0 +1,14 @@
+slice,n,benign,phishing
+all_test,1568,784,784
+evasion_indicator_proxy,450,164,286
+no_evasion_indicator_proxy,1118,620,498
+exact_url_not_in_training,1568,784,784
+domain_seen_in_training,885,210,675
+domain_unseen_in_training,683,574,109
+encoded_query,110,97,13
+redirect_key,11,7,4
+nested_url,36,23,13
+deep_subdomain,33,1,32
+deep_path,105,31,74
+high_domain_entropy,162,13,149
+high_token_variance,156,52,104

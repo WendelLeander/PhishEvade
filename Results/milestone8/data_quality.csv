@@ -1,0 +1,16 @@
+check,value
+rows,10000
+train rows,6272
+test rows,1568
+test benign,784
+test phishing,784
+evasion holdout rows,2160
+evasion holdout phishing,1080
+evasion holdout benign,1080
+test URLs whose registered domain occurs in training,885
+evasion holdout phishing URLs whose registered domain occurs in training,457
+test rows with exact 13-feature vector in training,472
+test URLs repeated verbatim in training,0
+normalized URLs with conflicting labels,0
+duplicate normalized URLs,0
+raw duplicate feature vectors (may be different URLs),2533
