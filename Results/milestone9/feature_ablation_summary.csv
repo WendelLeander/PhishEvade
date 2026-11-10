@@ -1,0 +1,11 @@
+Classifier,Features,ΔF1 (pp),95% ΔF1 interval (pp),ΔRecall (pp),ΔFPR (pp),F1 p (Holm),FPR reduction p (Holm)
+Logistic Regression,Level 2,6.42,+3.80 to +9.04,15.82,13.27,0.0048,1
+Logistic Regression,Combined,9.69,+6.46 to +12.73,12.88,-2.3,0.0048,1
+Random Forest,Level 2,3.52,+1.82 to +5.14,4.21,-2.42,0.0048,0.189
+Random Forest,Combined,5.17,+3.72 to +6.61,5.99,-3.83,0.0048,0.000339
+XGBoost,Level 2,3.04,+1.19 to +4.82,3.7,-2.04,0.0048,0.403
+XGBoost,Combined,5.89,+4.33 to +7.48,7.14,-4.08,0.0048,0.000609
+Naive Bayes,Level 2,-5.16,-7.58 to -2.56,30.74,72.19,0.0048,1
+Naive Bayes,Combined,-5.48,-7.86 to -2.99,28.19,68.62,0.0048,1
+AdaBoost,Level 2,2.78,+0.78 to +4.78,3.7,-1.4,0.0072,1
+AdaBoost,Combined,7.2,+5.61 to +8.88,8.55,-5.1,0.0048,6.01e-05
