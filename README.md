@@ -42,10 +42,12 @@ The project utilizes a balanced dataset of 10,000 URLs (50% benign, 50% phishing
 
 ## Authors
 
-* Maristela, Kyle Gabriel A.
+* Maristela, Kyle Gabriel A. — [kyle_maristela@dlsu.edu.ph](mailto:kyle_maristela@dlsu.edu.ph)
 
-* Leander, Wendel Walter A.
+* Leander, Wendel Walter A. — [wendel_leander@dlsu.edu.ph](mailto:wendel_leander@dlsu.edu.ph)
 
-* San Luis, Owen Phillip C.
+* San Luis, Owen Phillip C. — [owen_sanluis@dlsu.edu.ph](mailto:owen_sanluis@dlsu.edu.ph)
+
+**Adviser:** Cu, Jocelynn — [jocelynn.cu@dlsu.edu.ph](mailto:jocelynn.cu@dlsu.edu.ph)
 
 *De La Salle University - College of Computer Studies*
